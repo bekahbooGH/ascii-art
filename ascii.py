@@ -1,35 +1,43 @@
 ## Specifications
 
-class ASCII Canvas():
-
-    def__init__(self, height=0, width=0)
-        self.height = height
-        self.width = width
-
-    def print_canvas(self):
-
-    def clear_all_shapes(self):
-
-
-
-class Rectangles():
-    def__init__(self, height=0, width=0)
+class ASCII_Canvas():
+  def __init__(self, height=0, width=0):
     self.height = height
     self.width = width
-            
 
-    def render_to_canvas(self, x_start=0, y_start=0, x_end=0, y_end=0, char="-"):
-        self.x_start = x_start
-        self.y_start = y_start
-        self.x_end = x_start
-        self.y_end = y_start
-        self.char = char
+  def print_canvas(self):
+    for i in range(self.height): #I want to do like the min and max = so at 0 and 10
+      for j in range(self.width):
+        print("__")
 
-    def change_char(self, char="-"):
-        self.char = char
+    for j in range(self.width): #I want to do like the min and max = so at 0 and 10
+      for i in range(self.height):
+        print("|")
 
-canvas = ASCII Canvas()
-rectangle1 = Rectangle()
+  def clear_all_shapes(self):
+    for i in range(1, self.height-1):
+      for j in range(1, self.width-1):
+        # if something is there:
+        # make it none
+
+class Rectangle():
+  def __init__(self, height=0, width=0):
+    self.height = height
+    self.width = width
+          
+
+  def render_to_canvas(self, x_start=0, y_start=0, x_end=0, y_end=0, char="-"):
+      self.x_start = x_start
+      self.y_start = y_start
+      self.x_end = x_start
+      self.y_end = y_start
+      self.char = char
+
+  def change_char(self, char="-"):
+      self.char = char
+
+canvas = ASCII_Canvas(10, 10)
+rectangle1 = Rectangle(5, 3)
 
 You'll be in charge of implementing the API for drawing **rectangles** (and
 squares). The API must be able to:
@@ -82,3 +90,4 @@ should appear on top of other rectangles. For example:
 Make sure you do not render any characters that are out of bounds.
 
 Feel free to make decisions/assumptions about things you have questions about and please document these decisions (using comments in your solution is fine).
+
