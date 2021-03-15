@@ -5,18 +5,62 @@ class ASCII_Canvas():
     self.height = height
     self.width = width
 
-  def print_Canvas(self):
-      for j in range(self.width):
-        for i in range(1): #I want to do like the min and max = so at 0 and 10
-          print("__")
-        for i in range((self.height-1), self.height):
-          print("__")
+# def build_board(cols, rows, sp=2):
+#     board = []
+#     l = len(str(cols * rows)) + sp
+#     for i in range(1, cols * rows + 1):
+#         board.append(i)
+#         print('{0:>{1}}'.format(i, l), end='')
+#         if i % cols == 0:
+#             print()
+#     return board
 
-      for i in range(self.height):
-        for j in range(1):
-          print("|") #I want to do like the min and max = so at 0 and 10
-        for i in range((self.width-1), self.width):
-          print("|")
+# build_board(8, 17, 3)
+
+# for row in board:
+#     for column in row:
+#         print(column, end=' ')
+#     print()
+
+  def print_Canvas(self):
+    l_ = []
+    for i in range(self.height-1, self.height):
+      for j in range(self.width):
+        # if i == (self.height-1):
+        l_.append('__')
+    for i in range(0, self.height-1):
+      if i % 9 == 0:
+        l_.append('  ')
+      else:
+        l_.append('|')
+    # for i in range(1): #I want to do like the min and max = so at 0 and 10
+    #   l_.append('__')
+      
+
+    for i in range(self.height):
+      for j in range(1):
+        l_.append('|') #I want to do like the min and max = so at 0 and 10
+      for i in range((self.width-1), self.width):
+        l_.append('|')
+
+    joined_l = ''.join(l_)
+    for i, char in enumerate(joined_l):
+      print('{char}'.format(i), end='')
+      # print(char)
+      # if i % 10 == 0:
+      #   print('\n')
+    # print(len(joined_l))
+    # print(joined_l)
+    # for char in l_:
+    #   if char % 10 == 0:
+    #     \n
+
+#     board = []
+# for i in range(1,43):
+#     board.append(i)
+#     print('{:>4}'.format(i), end='')
+#     if i % 6 == 0:
+#         print()
 
   # def clear_all_shapes(self):
   #   for i in range(1):
