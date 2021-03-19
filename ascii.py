@@ -1,92 +1,60 @@
-## Specifications
+# 0123456789
+#0 
+#1 ***   *** 
+#2 * *   * *
+#3 ***   ***
+#4 
+#5 =========
+#6 =       = 
+#7 ========= 
+#8 
 
-class ASCII_Canvas():
-  def __init__(self, height=0, width=0):
-    self.height = height
-    self.width = width
 
-# def build_board(cols, rows, sp=2):
-#     board = []
-#     l = len(str(cols * rows)) + sp
-#     for i in range(1, cols * rows + 1):
-#         board.append(i)
-#         print('{0:>{1}}'.format(i, l), end='')
-#         if i % cols == 0:
-#             print()
-#     return board
+class Canvas():
+  def __init__(self, height, width, empty='.'):
+    self.data = [[empty]*width for _ in range(height)]
+    self.shapes = []
 
-# build_board(8, 17, 3)
+  def add(self, shape):
+    self.shapes.append(shape)
 
-# for row in board:
-#     for column in row:
-#         print(column, end=' ')
-#     print()
+  def clear(self):
+    self.shapes = []
 
-  def print_Canvas(self):
-    l_ = []
-    for i in range(self.height-1, self.height):
-      for j in range(self.width):
-        # if i == (self.height-1):
-        l_.append('__')
-    for i in range(0, self.height-1):
-      if i % 9 == 0:
-        l_.append('  ')
-      else:
-        l_.append('|')
-    # for i in range(1): #I want to do like the min and max = so at 0 and 10
-    #   l_.append('__')
-      
+  def render(self):
+    for shape in self.shapes:
+      shape.render(self.data)
+    for row in self.data:
+      print(''.join(row))
 
-    for i in range(self.height):
-      for j in range(1):
-        l_.append('|') #I want to do like the min and max = so at 0 and 10
-      for i in range((self.width-1), self.width):
-        l_.append('|')
-
-    joined_l = ''.join(l_)
-    for i, char in enumerate(joined_l):
-      print('{char}'.format(i), end='')
-      # print(char)
-      # if i % 10 == 0:
-      #   print('\n')
-    # print(len(joined_l))
-    # print(joined_l)
-    # for char in l_:
-    #   if char % 10 == 0:
-    #     \n
-
-#     board = []
-# for i in range(1,43):
-#     board.append(i)
-#     print('{:>4}'.format(i), end='')
-#     if i % 6 == 0:
-#         print()
-
-  # def clear_all_shapes(self):
-  #   for i in range(1):
-  #     for j in range(1, self.width-1):
-  #       # if something is there:
-  #       # make it none
 
 class Rectangle():
-  def __init__(self, height=0, width=0):
-    self.height = height
-    self.width = width
-          
+  def __init__(self, start_x, start_y, end_x, end_y, fill_char):
+    self.start_x = start_x
+    self.start_y = start_y
+    self.end_x = end_x
+    self.end_y = end_y
+    self.fill_char = fill_char
 
-  def render_to_canvas(self, x_start=0, y_start=0, x_end=0, y_end=0, char="-"):
-      self.x_start = x_start
-      self.y_start = y_start
-      self.x_end = x_start
-      self.y_end = y_start
-      self.char = char
+  def render(self, data):
+    for x in range(self.start_x, self.end_x+1):
+      for y in range(self.start_y, self.end_y+1):
+        data[y][x] = self.fill_char
 
-  def change_char(self, char="-"):
-      self.char = char
 
-canvas = ASCII_Canvas(10, 10)
-rectangle1 = Rectangle(5, 3)
-canvas.print_Canvas()
+c = Canvas(9, 10)
+rectangles = [
+  Rectangle(1, 1, 3, 3, '*'),
+  Rectangle(7, 1, 9, 3, '*'),
+  Rectangle(1, 5, 9, 7, '='),
+  Rectangle(2, 2, 2, 2, ' '),
+  Rectangle(8, 2, 8, 2, ' '),
+  Rectangle(2, 6, 8, 6, ' '),
+  ]
+for r in rectangles:
+  c.add(r) 
+
+c.render()
 
 # You'll be in charge of implementing the API for drawing **rectangles** (and
 # squares). The API must be able to:
