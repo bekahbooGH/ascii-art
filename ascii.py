@@ -40,7 +40,28 @@ class Rectangle():
     for x in range(self.start_x, self.end_x+1):
       for y in range(self.start_y, self.end_y+1):
         data[y][x] = self.fill_char
+  
+  def change_char(self, char):
+    self.fill_char = char
 
+  def translate(self, axis, nums):
+    if axis == 'y': #up or down
+      if nums < 0:
+        pass
+        # shift down, x start/end stays the same
+      else:
+        pass
+        # shift up, x start/end stays the same
+
+    elif axis == 'x': #left or right
+      if nums < 0:
+        pass
+        # shift left, y start/end stays the same
+      else:
+        pass
+        # shift right, y start/end stays the same
+    
+    pass
 
 c = Canvas(9, 10)
 rectangles = [
