@@ -43,25 +43,17 @@ class Rectangle():
   
   def change_char(self, char):
     self.fill_char = char
+    c.render()
 
   def translate(self, axis, nums):
     if axis == 'y': #up or down
-      if nums < 0:
-        pass
-        # shift down, x start/end stays the same
-      else:
-        pass
-        # shift up, x start/end stays the same
-
+      self.start_y += nums
+      self.end_y += nums
     elif axis == 'x': #left or right
-      if nums < 0:
-        pass
-        # shift left, y start/end stays the same
-      else:
-        pass
-        # shift right, y start/end stays the same
-    
-    pass
+      self.start_x += nums
+      self.end_x += nums
+    c.render()
+
 
 c = Canvas(9, 10)
 rectangles = [
@@ -76,6 +68,10 @@ for r in rectangles:
   c.add(r) 
 
 c.render()
+
+(rectangles[0]).translate('y', 2)
+
+# (rectangles[2]).change_char('_')
 
 # You'll be in charge of implementing the API for drawing **rectangles** (and
 # squares). The API must be able to:
@@ -119,13 +115,8 @@ c.render()
 #  ++.....
 #  ++.....
 #    .....
-
-
-
-
 # ```
 
 # Make sure you do not render any characters that are out of bounds.
 
 # Feel free to make decisions/assumptions about things you have questions about and please document these decisions (using comments in your solution is fine).
-
