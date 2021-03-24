@@ -12,7 +12,10 @@
 
 class Canvas():
   def __init__(self, height, width, empty='.'):
-    self.data = [[empty]*width for _ in range(height)]
+    # self.data = [[empty]*width for _ in range(height)]
+    self.height = height
+    self.width = width
+    self.empty = empty
     self.shapes = []
 
   def add(self, shape):
@@ -22,9 +25,10 @@ class Canvas():
     self.shapes = []
 
   def render(self):
+    data = [[self.empty]*self.width for i in range(self.height)]
     for shape in self.shapes:
-      shape.render(self.data)
-    for row in self.data:
+      shape.fill(data)
+    for row in data:
       print(''.join(row))
 
 
@@ -36,14 +40,18 @@ class Rectangle():
     self.end_y = end_y
     self.fill_char = fill_char
 
-  def render(self, data):
+  def __repr__(self):
+    return (
+        f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
+        f'{self.end_y}, {repr(self.fill_char)})')
+
+  def fill(self, data):
     for x in range(self.start_x, self.end_x+1):
       for y in range(self.start_y, self.end_y+1):
         data[y][x] = self.fill_char
   
   def change_char(self, char):
     self.fill_char = char
-    c.render()
 
   def translate(self, axis, nums):
     if axis == 'y': #up or down
@@ -52,7 +60,6 @@ class Rectangle():
     elif axis == 'x': #left or right
       self.start_x += nums
       self.end_x += nums
-    c.render()
 
 
 c = Canvas(9, 10)
@@ -68,10 +75,13 @@ for r in rectangles:
   c.add(r) 
 
 c.render()
+print(c.shapes)
+rectangles[0].translate('y', 2)
+c.render()
+rectangles[2].change_char('_')
+c.render()
+print(c.shapes)
 
-(rectangles[0]).translate('y', 2)
-
-# (rectangles[2]).change_char('_')
 
 # You'll be in charge of implementing the API for drawing **rectangles** (and
 # squares). The API must be able to:
@@ -120,3 +130,14 @@ c.render()
 # Make sure you do not render any characters that are out of bounds.
 
 # Feel free to make decisions/assumptions about things you have questions about and please document these decisions (using comments in your solution is fine).
+
+  # def translate(self, axis, nums):
+  #   if axis == 'y': #up or down
+  #       self.update_location(nums)
+  #         if positive, moves up, if negative, moves down. x start/end stays the same
+
+  #   elif axis == 'x': #left or right
+  #       self.start_x = self.start_x + int(nums)
+  #         if positive, moves right, if negative, moves left. y start/end stays the same
+
+  #   c.render()
