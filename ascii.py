@@ -31,8 +31,21 @@ class Canvas():
     for row in data:
       print(''.join(row))
 
-  def zoom(self, zoom):
-    data = [[self.empty]*(self.width) for _ in range((self.height))]
+  def zoom_in(self, zoom):
+    zoom_data = [[self.empty]*(self.width*zoom) for _ in range((self.height*zoom))]
+    for shape in self.shapes:
+
+      if shape.start_x < shape.start_y:
+        shape.start_x = shape.start_x
+        shape.start_y = shape.end_y - zoom + 1
+      elif shape.start_y < shape.start_x:
+        shape.start_y = shape.start_y
+        shape.start_x = shape.end_x - zoom + 1
+      shape.end_x - shape.start_x + 1
+      shape.end_y - shape.start_y + 1
+      shape.end_x = shape.end_x * zoom
+      shape.end_y = shape.end_y * zoom
+      shape.fill_char = shape.fill_char
 
 
 class Rectangle():
@@ -187,7 +200,7 @@ print(c.shapes)
 
 # class Canvas():
 #   def __init__(self, height, width, empty='.'):
-#     # self.data = [[1]*width for i in range(height, -1, -1)]
+#     # self.data = [[self.empty]*self.width for i in range(self.height)]
 #     self.height = height
 #     self.width = width
 #     self.empty = empty
