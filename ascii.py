@@ -11,11 +11,12 @@
 
 
 class Canvas():
-  def __init__(self, height, width, empty='.'):
+  def __init__(self, height, width, empty='.', zoom=1):
     # self.data = [[empty]*width for _ in range(height)]
     self.height = height
     self.width = width
     self.empty = empty
+    self.zoom = zoom
     self.shapes = []
 
   def add(self, shape):
@@ -25,45 +26,51 @@ class Canvas():
     self.shapes = []
 
   def render(self):
-    data = [[self.empty]*self.width for _ in range(self.height)]
+    data = [[self.empty]*self.width*self.zoom for _ in range(self.height*self.zoom)]
     for shape in self.shapes:
       shape.fill(data)
     for row in data:
       print(''.join(row))
 
   def zoom_in(self, zoom):
-    zoom_data = [[self.empty]*(self.width*zoom) for _ in range((self.height*zoom))]
+    #updates the self.zoom attribute
+    self.zoom = zoom
     for shape in self.shapes:
-
-      if shape.start_x < shape.start_y:
-        shape.start_x = shape.start_x
-        shape.start_y = shape.end_y - zoom + 1
-      elif shape.start_y < shape.start_x:
-        shape.start_y = shape.start_y
-        shape.start_x = shape.end_x - zoom + 1
-      shape.end_x - shape.start_x + 1
-      shape.end_y - shape.start_y + 1
-      shape.end_x = shape.end_x * zoom
-      shape.end_y = shape.end_y * zoom
-      shape.fill_char = shape.fill_char
+      shape.zoom_in(zoom)
+    #   if shape.start_x < shape.start_y:
+    #     shape.start_x = shape.start_x
+    #     shape.start_y = shape.end_y - zoom + 1
+    #   elif shape.start_y < shape.start_x:
+    #     shape.start_y = shape.start_y
+    #     shape.start_x = shape.end_x - zoom + 1
+    #   shape.end_x - shape.start_x + 1
+    #   shape.end_y - shape.start_y + 1
+    #   shape.end_x = shape.end_x * zoom
+    #   shape.end_y = shape.end_y * zoom
+    #   shape.fill_char = shape.fill_char
 
 
 class Rectangle():
-  def __init__(self, start_x, start_y, end_x, end_y, fill_char):
+  def __init__(self, start_x, start_y, end_x, end_y, fill_char, zoom=1):
     self.start_x = start_x
     self.start_y = start_y
     self.end_x = end_x
     self.end_y = end_y
     self.fill_char = fill_char
+    self.zoom = zoom
 
   def __repr__(self):
     return (
         f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
         f'{self.end_y}, {repr(self.fill_char)})')
 
+  def zoom_in(self, zoom):
+    #updates the self.zoom attribute
+    self.zoom = zoom
+
   def fill(self, data):
-    for y in range(self.start_y, self.end_y+1):
-      for x in range(self.start_x, self.end_x+1):
+    for y in range((self.start_y*self.zoom)-self.zoom+1, self.end_y*self.zoom+1):
+      for x in range((self.start_x*self.zoom)-self.zoom+1, self.end_x*self.zoom+1):
         data[y][x] = self.fill_char
   
   def change_char(self, char):
@@ -90,14 +97,18 @@ rectangles = [
 for r in rectangles:
   c.add(r) 
 c.render()
+print()
+c.zoom_in(1)
+c.render()
 
-print(c.shapes)
-rectangles[0].translate('y', 1)
-rectangles[3].translate('y', 1)
-c.render()
-rectangles[2].change_char('_')
-c.render()
-print(c.shapes)
+# print(c.shapes)
+# rectangles[0].translate('y', 1)
+# rectangles[3].translate('y', 1)
+# print(rectangles[0])
+# c.render()
+# rectangles[2].change_char('_')
+# c.render()
+# print(c.shapes)
 
 # *********INVERTED CANVAS - ON RECTANGLE.FILL()*********
 # # 0123456789
