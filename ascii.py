@@ -10,96 +10,96 @@
 # #8 
 
 
-class Canvas():
-  def __init__(self, height, width, empty='.', zoom=1):
-    # self.data = [[empty]*width for _ in range(height)]
-    self.height = height
-    self.width = width
-    self.empty = empty
-    self.zoom = zoom
-    self.shapes = []
+# class Canvas():
+#   def __init__(self, height, width, empty='.', zoom=1):
+#     # self.data = [[empty]*width for _ in range(height)]
+#     self.height = height
+#     self.width = width
+#     self.empty = empty
+#     self.zoom = zoom
+#     self.shapes = []
 
-  def add(self, shape):
-    self.shapes.append(shape)
+#   def add(self, shape):
+#     self.shapes.append(shape)
 
-  def clear(self):
-    self.shapes = []
+#   def clear(self):
+#     self.shapes = []
 
-  def render(self):
-    data = [[self.empty]*self.width*self.zoom for _ in range(self.height*self.zoom)]
-    for shape in self.shapes:
-      shape.fill(data)
-    for row in data:
-      print(''.join(row))
+#   def render(self):
+#     data = [[self.empty]*self.width*self.zoom for _ in range(self.height*self.zoom)]
+#     for shape in self.shapes:
+#       shape.fill(data)
+#     for row in data:
+#       print(''.join(row))
 
-  def zoom_in(self, zoom):
-    #updates the self.zoom attribute
-    self.zoom = zoom
-    for shape in self.shapes:
-      shape.zoom_in(zoom)
-    #   if shape.start_x < shape.start_y:
-    #     shape.start_x = shape.start_x
-    #     shape.start_y = shape.end_y - zoom + 1
-    #   elif shape.start_y < shape.start_x:
-    #     shape.start_y = shape.start_y
-    #     shape.start_x = shape.end_x - zoom + 1
-    #   shape.end_x - shape.start_x + 1
-    #   shape.end_y - shape.start_y + 1
-    #   shape.end_x = shape.end_x * zoom
-    #   shape.end_y = shape.end_y * zoom
-    #   shape.fill_char = shape.fill_char
+#   def zoom_in(self, zoom):
+#     #updates the self.zoom attribute
+#     self.zoom = zoom
+#     for shape in self.shapes:
+#       shape.zoom_in(zoom)
+#     #   if shape.start_x < shape.start_y:
+#     #     shape.start_x = shape.start_x
+#     #     shape.start_y = shape.end_y - zoom + 1
+#     #   elif shape.start_y < shape.start_x:
+#     #     shape.start_y = shape.start_y
+#     #     shape.start_x = shape.end_x - zoom + 1
+#     #   shape.end_x - shape.start_x + 1
+#     #   shape.end_y - shape.start_y + 1
+#     #   shape.end_x = shape.end_x * zoom
+#     #   shape.end_y = shape.end_y * zoom
+#     #   shape.fill_char = shape.fill_char
 
 
-class Rectangle():
-  def __init__(self, start_x, start_y, end_x, end_y, fill_char, zoom=1):
-    self.start_x = start_x
-    self.start_y = start_y
-    self.end_x = end_x
-    self.end_y = end_y
-    self.fill_char = fill_char
-    self.zoom = zoom
+# class Rectangle():
+#   def __init__(self, start_x, start_y, end_x, end_y, fill_char, zoom=1):
+#     self.start_x = start_x
+#     self.start_y = start_y
+#     self.end_x = end_x
+#     self.end_y = end_y
+#     self.fill_char = fill_char
+#     self.zoom = zoom
 
-  def __repr__(self):
-    return (
-        f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
-        f'{self.end_y}, {repr(self.fill_char)})')
+#   def __repr__(self):
+#     return (
+#         f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
+#         f'{self.end_y}, {repr(self.fill_char)})')
 
-  def zoom_in(self, zoom):
-    #updates the self.zoom attribute
-    self.zoom = zoom
+#   def zoom_in(self, zoom):
+#     #updates the self.zoom attribute
+#     self.zoom = zoom
 
-  def fill(self, data):
-    for y in range((self.start_y*self.zoom)-self.zoom+1, self.end_y*self.zoom+1):
-      for x in range((self.start_x*self.zoom)-self.zoom+1, self.end_x*self.zoom+1):
-        data[y][x] = self.fill_char
+#   def fill(self, data):
+#     for y in range((self.start_y*self.zoom)-self.zoom+1, self.end_y*self.zoom+1):
+#       for x in range((self.start_x*self.zoom)-self.zoom+1, self.end_x*self.zoom+1):
+#         data[y][x] = self.fill_char
   
-  def change_char(self, char):
-    self.fill_char = char
+#   def change_char(self, char):
+#     self.fill_char = char
 
-  def translate(self, axis, nums):
-    if axis == 'y': #up or down
-      self.start_y += nums
-      self.end_y += nums
-    elif axis == 'x': #left or right
-      self.start_x += nums
-      self.end_x += nums
+#   def translate(self, axis, nums):
+#     if axis == 'y': #up or down
+#       self.start_y += nums
+#       self.end_y += nums
+#     elif axis == 'x': #left or right
+#       self.start_x += nums
+#       self.end_x += nums
 
 
-c = Canvas(9, 10)
-rectangles = [
-  Rectangle(1, 1, 3, 3, '*'),
-  Rectangle(7, 1, 9, 3, '*'),
-  Rectangle(1, 5, 9, 7, '='),
-  Rectangle(2, 2, 2, 2, ' '),
-  Rectangle(8, 2, 8, 2, ' '),
-  Rectangle(2, 6, 8, 6, ' '),
-  ]
-for r in rectangles:
-  c.add(r) 
-c.render()
-print()
-c.zoom_in(1)
-c.render()
+# c = Canvas(9, 10)
+# rectangles = [
+#   Rectangle(1, 1, 3, 3, '*'),
+#   Rectangle(7, 1, 9, 3, '*'),
+#   Rectangle(1, 5, 9, 7, '='),
+#   Rectangle(2, 2, 2, 2, ' '),
+#   Rectangle(8, 2, 8, 2, ' '),
+#   Rectangle(2, 6, 8, 6, ' '),
+#   ]
+# for r in rectangles:
+#   c.add(r) 
+# c.render()
+# print()
+# c.zoom_in(1)
+# c.render()
 
 # print(c.shapes)
 # rectangles[0].translate('y', 1)
@@ -209,82 +209,136 @@ c.render()
 #1 ========= 
 #0 
 
-# class Canvas():
-#   def __init__(self, height, width, empty='.'):
-#     # self.data = [[self.empty]*self.width for i in range(self.height)]
-#     self.height = height
-#     self.width = width
-#     self.empty = empty
-#     self.shapes = []
+class Canvas():
+  def __init__(self, height, width, empty=' '):
+    # self.data = [[1]*width for i in range(height)]
+    self.height = height
+    self.width = width
+    self.empty = empty
+    self.shapes = []
 
-#   def add(self, shape):
-#     self.shapes.append(shape)
+  def add(self, shape):
+    self.shapes.append(shape)
 
-#   def clear(self):
-#     self.shapes = []
+  def clear(self):
+    self.shapes = []
 
-#   def render(self):
-#     self.data = [[self.empty]*self.width for _ in range(self.height)]
-#     for shape in self.shapes:
-#       shape.fill(self) #something here? why wont the rectangle print at like (1,1) instead of still printing at the old location (7,1).
-#     for row in self.data:
-#       print(''.join (row))
+  def render(self):
+    self.logical_pixels = [[self.empty]*self.width for _ in range(self.height)]
+    for shape in self.shapes:
+      shape.diamond_recurse(self)
+    for row in self.logical_pixels:
+      print(''.join (row))
+    # render to physical pixels
 
-#   def set_pixel(self, x, y, val):
-#     if 0 <= x < self.width and 0 <= y < self.height:
-#       self.data[self.height - y - 1][x] = val
+  def set_logical_pixel(self, x, y, val):
+    if 0 <= x < self.width and 0 <= y < self.height:
+      self.logical_pixels[self.height - y - 1][x] = val
+
+  # def zoom_in(self, zoom):
+  #   self.zoom = zoom
+  #   for shape in self.shapes:
+  #     shape.zoom_in(zoom)
 
 
-# class Rectangle():
-#   def __init__(self, start_x, start_y, end_x, end_y, fill_char):
-#     self.start_x = start_x
-#     self.start_y = start_y
-#     self.end_x = end_x
-#     self.end_y = end_y
-#     self.fill_char = fill_char
+class Rectangle():
+  def __init__(self, start_x, start_y, end_x, end_y, fill_char):
+    self.start_x = start_x
+    self.start_y = start_y
+    self.end_x = end_x
+    self.end_y = end_y
+    self.fill_char = fill_char
 
-#   def __repr__(self):
-#     return (
-#         f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
-#         f'{self.end_y}, {repr(self.fill_char)})')
+  def __repr__(self):
+    return (
+        f'Rectangle({self.start_x}, {self.start_y}, {self.end_x}, '
+        f'{self.end_y}, {repr(self.fill_char)})')
 
-#   def fill(self, canvas):
-#     for y in range(self.start_y, self.end_y+1): 
-#       for x in range(self.start_x, self.end_x+1): 
-#         canvas.set_pixel(x, y, self.fill_char)
-        
+  def fill(self, canvas):
+    for y in range(self.start_y, self.end_y+1): 
+      for x in range(self.start_x, self.end_x+1):
+        # canvas.data[y][x] = self.fill_char 
+        canvas.set_logical_pixel(x, y, self.fill_char)
 
-#   def change_char(self, char):
-#     self.fill_char = char
+  def change_char(self, char):
+    self.fill_char = char
 
-#   def translate(self, axis, nums):
-#     if axis == 'y': #up or down
-#       self.start_y += nums
-#       self.end_y += nums
-#     elif axis == 'x': #left or right
-#       self.start_x += nums
-#       self.end_x += nums
+  def translate(self, axis, nums):
+    if axis == 'y': #up or down
+      self.start_y += nums
+      self.end_y += nums
+    elif axis == 'x': #left or right
+      self.start_x += nums
+      self.end_x += nums
 
-# c = Canvas(9, 10)
-# rectangles = [
-#   Rectangle(1, 5, 3, 7, '*'),
-#   Rectangle(7, 5, 9, 7, '*'),
-#   Rectangle(1, 1, 9, 3, '='),
-#   Rectangle(2, 6, 2, 6, ' '),
-#   Rectangle(8, 6, 8, 6, ' '),
-#   Rectangle(2, 2, 8, 2, ' '),
-#   ]
-# for r in rectangles:
-#   c.add(r) 
-# c.render()
+class Diamond():
+  def __init__(self, left_x, left_y, right_x, right_y, fill_char):
+    self.left_x = left_x
+    self.left_y = left_y
+    self.right_x = right_x
+    self.right_y = right_y
+    self.fill_char = fill_char
 
-# print(c.shapes)
-# rectangles[0].translate('y', 1)
-# rectangles[3].translate('y', 1)
-# c.render()
-# rectangles[2].change_char('_')
-# c.render()
-# print(c.shapes)
+  def __repr__(self):
+    return (
+        f'Star({self.left_x}, {self.left_y}, {self.right_x}, '
+        f'{self.right_y}, {repr(self.fill_char)})')
+
+  def diamond_recurse(self, canvas):
+    self.x_left_pixel = self.left_x
+    self.x_right_pixel = self.right_x
+    self.y_left_pixel = self.left_y
+    self.y_right_pixel = self.right_y
+    for x in range(self.x_left_pixel, self.x_right_pixel+1):
+      for y in range(self.y_left_pixel, self.y_right_pixel+1):
+        canvas.set_logical_pixel(x, y, self.fill_char)
+    self.x_left_pixel += 1
+    self.x_right_pixel -= 1
+    self.y_left_pixel -= 1
+    self.y_right_pixel -= 1
+    self.diamond_recurse(canvas)
+
+
+  # def fill(self, canvas):
+  #   for y in range(self.start_y, self.height+1, 2):
+  #     for x in range(self.start_x, (self.start_x + (self.height//4*3//2)), i):
+  #       i -= 1
+  #       # canvas.data[y][x] = self.fill_char 
+  #       canvas.set_pixel(x, y, self.fill_char)
+  #     for x in range(self.start_x, (self.start_x - (self.height//4*3//2)), -2):
+  #       canvas.set_pixel(x, y, self.fill_char)
+
+  def change_char(self, char):
+    self.fill_char = char
+
+  def translate(self, axis, nums):
+    if axis == 'y': #up or down
+      self.start_y += nums
+      self.end_y += nums
+    elif axis == 'x': #left or right
+      self.start_x += nums
+      self.end_x += nums
+
+c = Canvas(9, 10)
+rectangles = [
+  Rectangle(1, 5, 3, 7, '*'),
+  Rectangle(7, 5, 9, 7, '*'),
+  Rectangle(1, 1, 9, 3, '='),
+  Rectangle(2, 6, 2, 6, ' '),
+  Rectangle(8, 6, 8, 6, ' '),
+  Rectangle(2, 2, 8, 2, ' '),
+  ]
+for r in rectangles:
+  c.add(r) 
+c.render()
+
+print(c.shapes)
+rectangles[0].translate('y', 1)
+rectangles[3].translate('y', 1)
+c.render()
+rectangles[2].change_char('_')
+c.render()
+print(c.shapes)
 
 
 # You'll be in charge of implementing the API for drawing **rectangles** (and
